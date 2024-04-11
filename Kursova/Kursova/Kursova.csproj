@@ -37,6 +37,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -65,6 +69,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Migrations\202404111930071_FirstMigration.cs" />
+    <Compile Include="Migrations\202404111930071_FirstMigration.Designer.cs">
+      <DependentUpon>202404111930071_FirstMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Modul\Data\UserActivity.cs" />
+    <Compile Include="Modul\Data\UserData.cs" />
+    <Compile Include="Modul\Data\UserHealth.cs" />
+    <Compile Include="Modul\MyDBContext.cs" />
     <Compile Include="View\UserControls\newPasswordBlock.xaml.cs">
       <DependentUpon>newPasswordBlock.xaml</DependentUpon>
     </Compile>
@@ -80,8 +93,8 @@
     <Compile Include="View\UserInterface\Pages\ArchivePage.xaml.cs">
       <DependentUpon>ArchivePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserInterface\Pages\Authorization.xaml.cs">
-      <DependentUpon>Authorization.xaml</DependentUpon>
+    <Compile Include="View\UserInterface\Pages\AuthorizationPage.xaml.cs">
+      <DependentUpon>AuthorizationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserInterface\Pages\HealthyPage.xaml.cs">
       <DependentUpon>HealthyPage.xaml</DependentUpon>
@@ -121,7 +134,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserInterface\Pages\Authorization.xaml">
+    <Page Include="View\UserInterface\Pages\AuthorizationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,6 +161,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\202404111930071_FirstMigration.resx">
+      <DependentUpon>202404111930071_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -160,9 +176,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modul\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\user.png" />

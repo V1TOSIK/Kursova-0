@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Kursova.View.UserInterface.Pages"
       xmlns:userControls="clr-namespace:Kursova.View.UserControls"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="400">
+      d:DesignHeight="450" d:DesignWidth="400"
+      Background="Transparent">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -18,13 +19,14 @@
                 <RowDefinition Height="35*" MaxHeight="200" MinHeight="100" />
             </Grid.RowDefinitions>
             <Image Grid.Row="0" HorizontalAlignment="Center" Margin="0,30,0,20" VerticalAlignment="Bottom"
-               Height="auto" Width="auto" Source="../img/user.png"/>
+               Height="auto" Width="auto" Source="/img/user.png"/>
 
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
+
                 <userControls:newTextBlock x:Name="logTextBox" Placeholder="Логін" Grid.Row="0" Width="150" Height="20"/>
                 <userControls:newPasswordBlock x:Name="logPassBox" PlaceholderPass="Пароль" Grid.Row="1" Width="150" Height="20"/>
 
