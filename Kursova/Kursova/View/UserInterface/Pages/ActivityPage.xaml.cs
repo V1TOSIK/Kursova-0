@@ -1,28 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Kursova.Modul;
+using Kursova.Modul.Data;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Kursova.View.UserInterface.Pages
 {
-  /// <summary>
-  /// Interaction logic for ActivityPage.xaml
-  /// </summary>
   public partial class ActivityPage : Page
   {
-    public ActivityPage()
+    private MyDBContext context;
+    private UserData user;
+    public ActivityPage(MyDBContext context,UserData user)
     {
+      this.context = context;
+      this.user = user;
       InitializeComponent();
     }
+
   }
 }

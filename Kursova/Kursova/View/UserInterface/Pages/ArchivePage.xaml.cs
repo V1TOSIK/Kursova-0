@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Kursova.Modul;
+using Kursova.Modul.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Kursova.View.UserInterface.Pages
 {
-  /// <summary>
-  /// Interaction logic for ArchivePage.xaml
-  /// </summary>
   public partial class ArchivePage : Page
   {
-    public ArchivePage()
+    private MyDBContext context;
+    private UserData user;
+    public ArchivePage(MyDBContext context, UserData user)
     {
       InitializeComponent();
+      this.context = context;
+      this.user = user;
+      LoadData();
+    }
+    private void LoadData()
+    {
+      dataGrid.ItemsSource = context.Users.ToList();
     }
   }
 }

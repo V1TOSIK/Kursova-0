@@ -38,8 +38,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -73,11 +72,19 @@
     <Compile Include="Migrations\202404111930071_FirstMigration.Designer.cs">
       <DependentUpon>202404111930071_FirstMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202404152014568_newDateDB.cs" />
+    <Compile Include="Migrations\202404152014568_newDateDB.Designer.cs">
+      <DependentUpon>202404152014568_newDateDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modul\Data\UserActivity.cs" />
     <Compile Include="Modul\Data\UserData.cs" />
+    <Compile Include="Modul\Data\UserDate.cs" />
     <Compile Include="Modul\Data\UserHealth.cs" />
     <Compile Include="Modul\MyDBContext.cs" />
+    <Compile Include="View\UserControls\GrayTextBlock.xaml.cs">
+      <DependentUpon>GrayTextBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\newPasswordBlock.xaml.cs">
       <DependentUpon>newPasswordBlock.xaml</DependentUpon>
     </Compile>
@@ -102,6 +109,10 @@
     <Compile Include="View\UserInterface\Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\UserControls\GrayTextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\newPasswordBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,6 +175,9 @@
     <EmbeddedResource Include="Migrations\202404111930071_FirstMigration.resx">
       <DependentUpon>202404111930071_FirstMigration.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404152014568_newDateDB.resx">
+      <DependentUpon>202404152014568_newDateDB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -182,6 +196,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

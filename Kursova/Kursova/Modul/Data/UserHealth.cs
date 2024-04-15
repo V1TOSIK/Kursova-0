@@ -7,7 +7,7 @@
     public string Pressure { get; set; }
     public string VolumeOxygenInBlood { get; set; }
 
-    public int UserId { get; set; }
-    public virtual UserData User { get; set; }
+    public int DateId { get; set; }
+    public virtual UserDate Date { get; set; }
   }
 }
