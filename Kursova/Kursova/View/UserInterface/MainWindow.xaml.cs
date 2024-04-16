@@ -1,7 +1,6 @@
 ﻿using Kursova.Modul;
 using Kursova.Modul.Data;
 using Kursova.View.UserInterface.Pages;
-using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Windows;
@@ -13,6 +12,9 @@ namespace Kursova
   {
     private MyDBContext context = new MyDBContext();
     private UserData user = new UserData();
+    private UserDate todayUserDate;
+    private ActivityPage activityPage;
+    private HealthyPage healthyPage;
     public MainWindow(UserData user, MyDBContext context)
     {
       InitializeComponent();
@@ -21,7 +23,8 @@ namespace Kursova
     }
     private void SaveDataButton_Click(object sender, RoutedEventArgs e)
     {
-
+      if (activityPage != null) activityPage.SaveActivityData();
+      if (healthyPage != null) healthyPage.SaveHealthData();
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -30,14 +33,22 @@ namespace Kursova
       DateTime today = DateTime.Today;
       try
       {
-        bool userDateExists = context.Users.Any(d => d.Id == user.Id);
-        bool userTimeExists = context.Dates.Any(t => t.Id == user.Id && t.Datetime == today);
+        bool userDateExists = context.Dates.Any(t => t.UserId == user.Id);
+        bool userTimeExists = context.Dates.Any(t => t.UserId == user.Id && t.Datetime == today);
 
-        if (!userDateExists && !userTimeExists)
+        if (!userDateExists || !userTimeExists)
         {
-          
+          todayUserDate = new UserDate()
+          {
+            Datetime = today,
+            UserId = user.Id,
+          };
+          context.Dates.Add(todayUserDate);
+          context.SaveChanges();
+          MessageBox.Show("nova data stvorena");
         }
-        context.SaveChanges();
+        else { todayUserDate = context.Dates.FirstOrDefault();}
+        
       }
       catch (Exception ex)
       {
@@ -48,7 +59,7 @@ namespace Kursova
 
     private void activity_button_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-      ActivityPage activityPage = new ActivityPage(context, user);
+      activityPage = new ActivityPage(context, user, todayUserDate);
       Frame parentFrame = mainFrame;
       if (parentFrame != null)
       {
@@ -58,7 +69,7 @@ namespace Kursova
 
     private void health_page_button_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-      HealthyPage healthyPage = new HealthyPage(context, user);
+      healthyPage = new HealthyPage(context, user,todayUserDate);
       Frame parentWindow = mainFrame;
       if (parentWindow != null)
       {
@@ -68,7 +79,7 @@ namespace Kursova
 
     private void archive_page_button_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-      ArchivePage archivePage = new ArchivePage(context, user);
+      ArchivePage archivePage = new ArchivePage(context, user, todayUserDate);
       Frame parentWindow = mainFrame;
       if (parentWindow != null)
       {

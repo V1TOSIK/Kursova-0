@@ -61,7 +61,7 @@ namespace Kursova.View.UserInterface.Pages
     bool IsNameExists(string name) {
       if (name != null && context.Users != null && name != string.Empty)
       {
-       return context.Users.Any(u => u.Name != name);
+       return context.Users.Any(u => u.Name == name);
       }
       return false;
     }

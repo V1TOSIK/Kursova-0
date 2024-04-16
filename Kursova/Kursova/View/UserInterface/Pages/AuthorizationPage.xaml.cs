@@ -38,7 +38,7 @@ namespace Kursova.View.UserInterface.Pages
       catch (Exception ex)
       {
 
-        throw;
+        MessageBox.Show($"exeption:{ex}");
       }
     }
     void ClearText()

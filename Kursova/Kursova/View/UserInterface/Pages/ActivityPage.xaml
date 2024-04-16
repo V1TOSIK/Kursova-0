@@ -26,7 +26,7 @@
             </Grid.RowDefinitions>
             <userControls:newTextBlock x:Name="ExerciseBox" Width="350" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"
                        Placeholder="Виконані вправи"/>
-            <userControls:newTextBlock x:Name="Clories_upvolumeBox" Width="350" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <userControls:newTextBlock x:Name="Calories_upvolumeBox" Width="350" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"
                       Grid.Row="1" Placeholder="Кількість спожитих калорій"/>
             <userControls:newTextBlock x:Name="Calories_downvolumeBox" Width="350" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"
                       Grid.Row="2" Placeholder="Кількість спалених калорій"/>
