@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+
 namespace Kursova.Modul.Data
 {
-  public class CombinedData
+  public class ArchiveDataResult
   {
-    public int Id { get; set; }
-    public DateTime Date { get; set; }
+    public int UserId { get; set; }
+    public int DateId { get; set; }
+    public DateTime ArchiveDateTime { get; set; }
     public string ExerciseName { get; set; }
     public double ConsumedCalories { get; set; }
     public double BurnedCalories { get; set; }

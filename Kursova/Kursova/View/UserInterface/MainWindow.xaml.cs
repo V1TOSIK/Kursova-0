@@ -5,6 +5,7 @@ using System.Linq;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.Generic;
 
 namespace Kursova
 {
@@ -20,11 +21,12 @@ namespace Kursova
       InitializeComponent();
       this.context = context;
       this.user = user;
+
     }
     private void SaveDataButton_Click(object sender, RoutedEventArgs e)
     {
-      if (activityPage != null) activityPage.SaveActivityData();
-      if (healthyPage != null) healthyPage.SaveHealthData();
+      if (activityPage != null && mainFrame.Content == activityPage) activityPage.SaveActivityData();
+      if (healthyPage != null && mainFrame.Content == healthyPage) healthyPage.SaveHealthData();
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -36,7 +38,11 @@ namespace Kursova
         bool userDateExists = context.Dates.Any(t => t.UserId == user.Id);
         bool userTimeExists = context.Dates.Any(t => t.UserId == user.Id && t.Datetime == today);
 
-        if (!userDateExists || !userTimeExists)
+        if (userDateExists && userTimeExists)
+        {
+          todayUserDate = context.Dates.FirstOrDefault();
+        }
+        else
         {
           todayUserDate = new UserDate()
           {
@@ -45,9 +51,8 @@ namespace Kursova
           };
           context.Dates.Add(todayUserDate);
           context.SaveChanges();
-          MessageBox.Show("nova data stvorena");
+          MessageBox.Show("Нову дату було створено!");
         }
-        else { todayUserDate = context.Dates.FirstOrDefault();}
         
       }
       catch (Exception ex)
@@ -56,10 +61,9 @@ namespace Kursova
         throw;
       }
     }
-
     private void activity_button_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-      activityPage = new ActivityPage(context, user, todayUserDate);
+      if(activityPage == null) activityPage = new ActivityPage(context, user, todayUserDate);
       Frame parentFrame = mainFrame;
       if (parentFrame != null)
       {
@@ -69,7 +73,7 @@ namespace Kursova
 
     private void health_page_button_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-      healthyPage = new HealthyPage(context, user,todayUserDate);
+      if(healthyPage == null) healthyPage = new HealthyPage(context, user,todayUserDate);
       Frame parentWindow = mainFrame;
       if (parentWindow != null)
       {

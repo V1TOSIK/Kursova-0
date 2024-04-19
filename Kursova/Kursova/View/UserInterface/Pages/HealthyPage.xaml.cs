@@ -20,17 +20,26 @@ namespace Kursova.View.UserInterface.Pages
       this.todayUserDate = todayUserDate;
     }
     public void SaveHealthData() {
-      if (todayUserDate != null || todayUserDate.Health == null || todayUserDate.Health.Count == 0) { todayUserDate.Health = new List<UserHealth>(); }
+      if (todayUserDate == null || todayUserDate.Health == null || todayUserDate.Health.Count == 0) { todayUserDate.Health = new List<UserHealth>(); }
+
       if (todayUserDate != null) {
-        todayUserDate.Health.Add(new UserHealth()
+
+        string message = ChekingHealth(out int pulse, out string pressure, out string volumeOxygenInBlood);
+
+        if (message == string.Empty)
         {
-          Pulse = int.Parse( PulseBox.inputText.Text),
-          Pressure = PressureBox.inputText.Text,
-          VolumeOxygenInBlood = OxygenInBloodBox.inputText.Text,
-        }
+          todayUserDate.Health.Add(new UserHealth()
+          {
+            Pulse = pulse,
+            Pressure = pressure,
+            VolumeOxygenInBlood = volumeOxygenInBlood,
+          }
         );
-        context.SaveChanges();
-        ClearText();
+          context.SaveChanges();
+          ClearText();
+        }
+        else MessageBox.Show( message );
+        
       }
       else { MessageBox.Show("today == null"); }
     }
@@ -39,6 +48,24 @@ namespace Kursova.View.UserInterface.Pages
       PulseBox.inputText.Text = string.Empty;
       PressureBox.inputText.Text = string.Empty;
       OxygenInBloodBox.inputText.Text = string.Empty;
+    }
+    private string ChekingHealth(out int pulse, out string pressure, out string volumeOxygenInBlood)
+    {
+      string message = string.Empty;
+
+      if (int.TryParse(PulseBox.inputText.Text, out pulse))
+      {
+        if (pulse < 0) message += "Пульс не може бути від'ємним!\n";
+        if (pulse > 300) message += "Такий пульс неможливий!\n";
+      }
+
+      if (PressureBox.inputText.Text == null) { pressure = string.Empty; }
+      else { pressure = PressureBox.inputText.Text; }
+
+      if (OxygenInBloodBox.inputText.Text == null) { volumeOxygenInBlood = string.Empty; }
+      else { volumeOxygenInBlood = OxygenInBloodBox.inputText.Text; }
+
+      return message;
     }
   }
 }

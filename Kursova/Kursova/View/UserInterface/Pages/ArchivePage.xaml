@@ -9,7 +9,7 @@
       d:DesignHeight="350" d:DesignWidth="800">
     <DataGrid x:Name="myDataGrid" FontSize="14" FontWeight="Medium" AutoGenerateColumns="False">
         <DataGrid.Columns>
-            <DataGridTextColumn x:Name="dataColumn" IsReadOnly="True" Header="Дата" Width="*" Binding="{Binding Path=Datetime}"/>
+            <DataGridTextColumn x:Name="dataColumn" IsReadOnly="True" Header="Дата" Width="*" Binding="{Binding Path=ArchiveDateTime}"/>
             <DataGridTextColumn x:Name="exerciseColumn" IsReadOnly="True" Header="Виконані вправи" Width="*" Binding="{Binding Path=ExerciseName}"/>
             <DataGridTextColumn x:Name="upCaloriesColumn" IsReadOnly="True" Header="Спожиті калорії" Width="*" Binding="{Binding Path=ConsumedCalories}"/>
             <DataGridTextColumn x:Name="downCaloriesColumn" IsReadOnly="True" Header="Спалені калорії" Width="*" Binding="{Binding Path=BurnedCalories}"/>

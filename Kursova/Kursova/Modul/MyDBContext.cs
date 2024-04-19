@@ -8,7 +8,7 @@ namespace Kursova.Modul
     public MyDBContext() : base("DBConnectionString") {
 
     }
-    public DbSet<CombinedData> CombinedDatas { get; set; }
+    public DbSet<ArchiveData> ArchiveDatas { get; set; }
     public DbSet<UserData> Users { get; set; }
     public DbSet<UserDate> Dates { get; set; }
     public DbSet<UserActivity> Activities { get; set; }

@@ -68,24 +68,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\202404111930071_FirstMigration.cs" />
-    <Compile Include="Migrations\202404111930071_FirstMigration.Designer.cs">
-      <DependentUpon>202404111930071_FirstMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202404152014568_newDateDB.cs" />
-    <Compile Include="Migrations\202404152014568_newDateDB.Designer.cs">
-      <DependentUpon>202404152014568_newDateDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202404152132431_newActivityAndHealth.cs" />
-    <Compile Include="Migrations\202404152132431_newActivityAndHealth.Designer.cs">
-      <DependentUpon>202404152132431_newActivityAndHealth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202404161820418_AddCombinedData.cs" />
-    <Compile Include="Migrations\202404161820418_AddCombinedData.Designer.cs">
-      <DependentUpon>202404161820418_AddCombinedData.cs</DependentUpon>
+    <Compile Include="Migrations\202404191737188_FirstMigration.cs" />
+    <Compile Include="Migrations\202404191737188_FirstMigration.Designer.cs">
+      <DependentUpon>202404191737188_FirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Modul\Data\CombinedData.cs" />
+    <Compile Include="Modul\Data\ArchiveData.cs" />
+    <Compile Include="Modul\Data\ArchiveDataResult.cs" />
     <Compile Include="Modul\Data\UserActivity.cs" />
     <Compile Include="Modul\Data\UserData.cs" />
     <Compile Include="Modul\Data\UserDate.cs" />
@@ -181,17 +170,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\202404111930071_FirstMigration.resx">
-      <DependentUpon>202404111930071_FirstMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202404152014568_newDateDB.resx">
-      <DependentUpon>202404152014568_newDateDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202404152132431_newActivityAndHealth.resx">
-      <DependentUpon>202404152132431_newActivityAndHealth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202404161820418_AddCombinedData.resx">
-      <DependentUpon>202404161820418_AddCombinedData.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202404191737188_FirstMigration.resx">
+      <DependentUpon>202404191737188_FirstMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
