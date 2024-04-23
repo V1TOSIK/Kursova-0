@@ -27,12 +27,12 @@ namespace Kursova
     {
       if (activityPage != null && mainFrame.Content == activityPage) activityPage.SaveActivityData();
       if (healthyPage != null && mainFrame.Content == healthyPage) healthyPage.SaveHealthData();
-      
+
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-      
+
 
       DateTimeBlock.Text = DateTime.Today.ToString("dd.MM.yyyy");
       DateTime today = DateTime.Today;
@@ -72,7 +72,7 @@ namespace Kursova
         parentFrame.Content = activityPage;
       }
     }
-    
+
     private void health_page_button_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
       Frame parentWindow = mainFrame;
@@ -93,4 +93,5 @@ namespace Kursova
 
     }
   }
+
 }
