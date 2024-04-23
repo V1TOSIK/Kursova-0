@@ -24,6 +24,7 @@ namespace Kursova.Modul
           .HasMany(ud => ud.Health)
           .WithRequired(h => h.Date)
           .HasForeignKey(h => h.DateId);
+          
       modelBuilder.Entity<UserDate>()
           .HasMany(d => d.Activity)
           .WithRequired(h => h.Date)

@@ -2,6 +2,7 @@
 using Kursova.Modul.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -23,33 +24,15 @@ namespace Kursova.View.UserInterface.Pages
     public void SaveActivityData() {
       try
       {
-        if (todayUserDate == null || todayUserDate.Activity == null || todayUserDate.Activity.Capacity == 0)
+        if (todayUserDate?.Activity?.Count == 0)
         {
           todayUserDate.Activity = new List<UserActivity>();
         }
 
+        var existingActivity = context.Activities.FirstOrDefault(a => a.DateId == todayUserDate.Id);
 
-        if (todayUserDate != null)
-        {
-          string message = ChekingActivity(out string exerciseData, out double consumedCaloriesData, out double burnedCalories, out int stepsData, out double traveledData);
-                 
-          if (message == string.Empty)
-          {
-            todayUserDate.Activity.Add(new UserActivity()
-            {
-              ExerciseName = exerciseData,
-              ConsumedCalories = consumedCaloriesData,
-              BurnedCalories = burnedCalories,
-              Steps = stepsData,
-              Traveled = traveledData,
-            });
-            context.SaveChanges();
-            ClearText();
-          }
-          else MessageBox.Show(message);
-          
-        }
-        else { MessageBox.Show("today == null"); }
+          if (existingActivity != null) { UpdateExistingActivity(existingActivity); }
+          else CreateNewActivity();
       }
       catch (Exception ex)
       {
@@ -69,8 +52,8 @@ namespace Kursova.View.UserInterface.Pages
     {
       string message = string.Empty;
 
-      if (ExerciseBox.inputText.Text == null) { exerciseData = string.Empty; }
-      else { exerciseData = ExerciseBox.inputText.Text; }
+      if(!string.IsNullOrEmpty(ExerciseBox.inputText.Text)) { exerciseData = ExerciseBox.inputText.Text; }
+      else { exerciseData = string.Empty; }
 
       if (double.TryParse(Calories_upvolumeBox.inputText.Text, out consumedCaloriesData))
       {
@@ -94,6 +77,49 @@ namespace Kursova.View.UserInterface.Pages
       }
 
       return message;
+    }
+
+    private void UpdateExistingActivity(UserActivity existingActivity)
+    {
+      string message = ChekingActivity(out string exerciseData, out double consumedCaloriesData, out double burnedCalories, out int stepsData, out double traveledData);
+
+      if (message == string.Empty)
+      {
+        existingActivity.ExerciseName = exerciseData;
+        existingActivity.ConsumedCalories = consumedCaloriesData;
+        existingActivity.BurnedCalories = burnedCalories;
+        existingActivity.Steps = stepsData;
+        existingActivity.Traveled = traveledData;
+        context.SaveChanges();
+        ClearText();
+      }
+      else
+      {
+        MessageBox.Show(message);
+      }
+    }
+
+    private void CreateNewActivity()
+    {
+      string message = ChekingActivity(out string exerciseData, out double consumedCaloriesData, out double burnedCalories, out int stepsData, out double traveledData);
+
+      if (message == string.Empty)
+      {
+        todayUserDate.Activity.Add(new UserActivity()
+        {
+          ExerciseName = exerciseData,
+          ConsumedCalories = consumedCaloriesData,
+          BurnedCalories = burnedCalories,
+          Steps = stepsData,
+          Traveled = traveledData,
+        });
+        context.SaveChanges();
+        ClearText();
+      }
+      else
+      {
+        MessageBox.Show(message);
+      }
     }
   }
 }

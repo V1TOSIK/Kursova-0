@@ -1,11 +1,11 @@
 ﻿using Kursova.Modul;
 using Kursova.Modul.Data;
 using Kursova.View.UserInterface.Pages;
-using System.Linq;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Kursova
 {
@@ -27,20 +27,22 @@ namespace Kursova
     {
       if (activityPage != null && mainFrame.Content == activityPage) activityPage.SaveActivityData();
       if (healthyPage != null && mainFrame.Content == healthyPage) healthyPage.SaveHealthData();
+      
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
+      
+
       DateTimeBlock.Text = DateTime.Today.ToString("dd.MM.yyyy");
       DateTime today = DateTime.Today;
       try
       {
-        bool userDateExists = context.Dates.Any(t => t.UserId == user.Id);
         bool userTimeExists = context.Dates.Any(t => t.UserId == user.Id && t.Datetime == today);
 
-        if (userDateExists && userTimeExists)
+        if (userTimeExists)
         {
-          todayUserDate = context.Dates.FirstOrDefault();
+          todayUserDate = context.Dates.FirstOrDefault(t => t.UserId == user.Id && t.Datetime == today);
         }
         else
         {
@@ -53,7 +55,8 @@ namespace Kursova
           context.SaveChanges();
           MessageBox.Show("Нову дату було створено!");
         }
-        
+        if (activityPage == null) activityPage = new ActivityPage(context, user, todayUserDate);
+        if (healthyPage == null) healthyPage = new HealthyPage(context, user, todayUserDate);
       }
       catch (Exception ex)
       {
@@ -63,17 +66,15 @@ namespace Kursova
     }
     private void activity_button_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-      if(activityPage == null) activityPage = new ActivityPage(context, user, todayUserDate);
       Frame parentFrame = mainFrame;
       if (parentFrame != null)
       {
         parentFrame.Content = activityPage;
       }
     }
-
+    
     private void health_page_button_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-      if(healthyPage == null) healthyPage = new HealthyPage(context, user,todayUserDate);
       Frame parentWindow = mainFrame;
       if (parentWindow != null)
       {
